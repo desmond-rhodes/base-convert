@@ -7,10 +7,8 @@
 class ap_n {
 	public:
 		using base_t = unsigned long long;
-		// static constexpr base_t base {0xffffffffffffffff};
-		// static constexpr base_t bits {64};
-		static constexpr base_t base {0x7f};
-		static constexpr base_t bits {7};
+		static constexpr base_t base {0xffffffffffffffff};
+		static constexpr base_t bits {64};
 
 		using size_type = std::vector<base_t>::size_type;
 		size_type size() const;
@@ -36,7 +34,7 @@ class ap_n {
 
 		std::ostream& out(std::ostream&) const;
 
-		explicit operator size_t() const { return index[0]; };
+		explicit operator size_t() const { return (index.size()) ? index[0] : 0; };
 		explicit operator bool() const { return !operator==(0); };
 		ap_n(base_t x) : index {x} {};
 
