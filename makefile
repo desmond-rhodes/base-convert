@@ -1,19 +1,21 @@
-CC := g++
-FLAGS := -std=c++17
-PROGRAM := program
+OUT := base-convert
+OBJS := main.o ap_n.o
 
-.PHONY: all
-all: $(PROGRAM)
+CXX := g++
+CXXFLAGS := -std=c++17
 
-$(PROGRAM): main.o
-	$(CC) $(FLAGS) -o $@ $^
+TMP := .$(OUT)
 
-%.o: %.cc %.hh
-	$(CC) $(FLAGS) -c $<
-%.o: %.cc
-	$(CC) $(FLAGS) -c $<
+$(OUT): $(OBJS)
+	touch $(TMP).cc
+	make $(TMP)
+	mv $(TMP) $@
+	rm $(TMP)*
+
+$(TMP): $(TMP).cc $(OBJS)
 
 .PHONY: clean
 clean:
-	rm -f $(PROGRAM)
 	rm -f *.o
+	rm -f $(OUT)
+	rm -f $(TMP)*
