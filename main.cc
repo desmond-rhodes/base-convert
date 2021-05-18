@@ -37,7 +37,9 @@ int main(int argc, char* argv[]) {
 	if (args.size() != 3) {
 		std::cerr
 			<< "usage:\n"
-			<< "\tsource-base target-base number\n";
+			<< "\tsource-base target-base number\n"
+			<< "\tsource-base target-base -\n"
+			<< "\t\treceive number from stdin.\n";
 		return -1;
 	}
 
@@ -57,7 +59,19 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	for (auto c: args[2]) {
+	std::string number;
+
+	if (args[2] == "-") {
+		for (char c; std::cin.get(c); )
+			number += c;
+		/* pop_back() is undefined when size() == 0 */
+		if (number.size() != 0 && number.back() == '\n')
+			number.pop_back();
+	} else {
+		number = args[2];
+	}
+
+	for (auto c: number) {
 		for (size_t i {0}; i < symbol.size(); ++i)
 			if (c == symbol[i]) {
 				if (i < sbase)
@@ -70,7 +84,7 @@ int main(int argc, char* argv[]) {
 		skip:;
 	}
 
-	std::cout << ntos(ston<ap_n>(args[2], sbase), tbase) << '\n';
+	std::cout << ntos(ston<ap_n>(number, sbase), tbase) << '\n';
 
 	return 0;
 }
