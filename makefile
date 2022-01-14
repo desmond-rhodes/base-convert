@@ -1,5 +1,5 @@
 OUT := base-convert
-OBJS := main.o ap_n.o
+OBJS := main.o big-int/ap_n.o
 
 CXX := g++
 CXXFLAGS := -std=c++17
@@ -14,8 +14,12 @@ $(OUT): $(OBJS)
 
 $(TMP): $(TMP).cc $(OBJS)
 
+big-int/%.o:
+	make -C big-int $(@:big-int/%=%)
+
 .PHONY: clean
 clean:
+	make -C big-int clean
 	rm -f *.o
 	rm -f $(OUT)
 	rm -f $(TMP)*

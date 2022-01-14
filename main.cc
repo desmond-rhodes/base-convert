@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include "ap_n.hh"
+#include "big-int/ap_n.hh"
 
 const std::string symbol = "0123456789abcdefghijklmnopqrstuvwxyz";
 
