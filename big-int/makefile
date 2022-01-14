@@ -6,15 +6,9 @@ ifeq ($(UNAME_S),Darwin)
 	CC := clang++
 endif
 FLAGS := -std=c++17
-PROGRAM := program
 
 .PHONY: all
-all: $(PROGRAM)
-
-$(PROGRAM): main.o ap_n.o
-	$(CC) $(FLAGS) -o $@ $^
-
-main.o: ap_n.hh
+all:
 
 %.o: %.cc %.hh
 	$(CC) $(FLAGS) -c $<
