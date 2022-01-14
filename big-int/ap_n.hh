@@ -31,6 +31,7 @@ class ap_n {
 		std::ostream& out(std::ostream&) const;
 
 		explicit operator bool();
+		explicit operator size_t();
 
 	private:
 		static base_t const bits {64};

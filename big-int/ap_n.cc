@@ -231,6 +231,7 @@ std::ostream& ap_n::out(std::ostream& os) const {
 }
 
 /* explicit */ ap_n::operator bool() { return size(); }
+/* explicit */ ap_n::operator size_t() { return index[0]; }
 
 /* Non-member */
 
